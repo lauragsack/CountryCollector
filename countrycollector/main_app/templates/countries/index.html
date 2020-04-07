@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Country List</h1>
+
+{% for country in countries %}
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ country.name }}</span>
+      <p>Breed: {{ country.breed }}</p>
+      <p>Description: {{ country.description }}</p>
+      {% if country.age > 0 %}
+        <p>Age: {{ country.age }}</p>
+      {% else %}
+        <p>Age: Kitten</p>
+      {% endif %}
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
