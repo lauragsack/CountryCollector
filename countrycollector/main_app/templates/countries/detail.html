@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Country List</h1>
+<h1>Country Details</h1>
 
-{% for country in countries %}
-  <div class="card">
-
-  <a href="{% url 'detail' country.id %}">
+<div class="card">
     <div class="card-content">
       <span class="card-title">{{ country.name }}</span>
       <p>Continent: {{ country.continent }}</p>
@@ -17,9 +14,6 @@
         <p>Visited: Not Yet!</p>
       {% endif %}
     </div>
-
-    </a>
   </div>
-{% endfor %}
 
 {% endblock %}
