@@ -6,3 +6,6 @@ class Country(models.Model):
     continent = models.CharField(max_length=100)
     language = models.CharField(max_length=100)
     visited = models.BooleanField()
+
+def __str__(self):
+    return self.name

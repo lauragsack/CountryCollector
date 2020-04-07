@@ -7,12 +7,12 @@
   <div class="card">
     <div class="card-content">
       <span class="card-title">{{ country.name }}</span>
-      <p>Breed: {{ country.breed }}</p>
-      <p>Description: {{ country.description }}</p>
-      {% if country.age > 0 %}
-        <p>Age: {{ country.age }}</p>
+      <p>Continent: {{ country.continent }}</p>
+      <p>Language: {{ country.language }}</p>
+      {% if country.visited == True %}
+        <p>Visited: Yes!</p>
       {% else %}
-        <p>Age: Kitten</p>
+        <p>Visited: Not Yet!</p>
       {% endif %}
     </div>
   </div>
