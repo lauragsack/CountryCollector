@@ -9,3 +9,14 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
+
+class City(models.Model):
+    name = models.CharField(max_length=100)
+    visited = models.BooleanField()
+    what_to_eat = models.TextField(max_length=250)
+
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    
