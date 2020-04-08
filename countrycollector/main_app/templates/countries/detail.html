@@ -19,20 +19,37 @@
     </div>
   </div>
   <div class="col s6">
+    <form method="post"></form>
+     {% csrf_token %}
+     {{ city_form.as_p }}
+     <input type="submit" class="btn" value="Add City">
+     </form>
     <table class="striped">
       <thead>
-        <tr><th>City</th><th>Eats</th>
+        <tr><th>City</th><th>Eats</th><th>Visited?</th>
       </thead>
       <tbody>
         {% for city in country.city_set.all %}
           <tr>
             <td>{{city.name}}</td>
             <td>{{city.what_to_eat}}</td>
+            {% if city.visited == True %}
+                <td>Yes!</td>
+            {% else %}
+                <td>Not yet!</td>
+            {% endif %}
           </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
 </div>
+
+<script>
+    let visitedEl = document.getElementById('id_visited')
+    let labelEl = document.querySelector('label[for = id_visited]')
+    labelEl.innerHTML += '<span></span>'
+    labelEl.prepend(visitedEl)
+</script>
 
 {% endblock %}
