@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Country
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
+from .models import Country, City, RiverCruise
 from .forms import CityForm
 # Create your views here.
 def home(request):
@@ -27,3 +29,23 @@ def add_city(request, country_id):
         new_city.country_id = country_id
         new_city.save()
     return redirect('detail', country_id=country_id)
+
+
+
+class CruiseList(ListView):
+    model = RiverCruise
+
+class CruiseDetail(DetailView):
+    model = RiverCruise
+
+class CruiseCreate(CreateView):
+    model = RiverCruise
+    fields = '__all__'
+
+class CruiseUpdate(UpdateView):
+    model = RiverCruise
+    fiels = ['name', 'type']
+
+class CruiseDelete(DeleteView):
+    model = RiverCruise
+    success_url = '/cruises/'
