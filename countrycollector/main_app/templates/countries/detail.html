@@ -49,7 +49,7 @@
   <div class="col s6">
     <h3>{{ country.name }}'s Cruises</h3>
     {% if country.cruises.count %}
-      {% for cruise in cat.cruises.all %}
+      {% for cruise in country.cruises.all %}
         <div class="card">
           <div class="card-content">
             <span class="card-title">
@@ -62,7 +62,28 @@
       <h5>No Cruises :(</h5>
     {% endif %}
   </div>
-  <!-- Available toys will come after this line -->
+  <div class="col s6">
+    <h3>Available Cruises</h3>
+    {% if cruises.count %}
+      {% for cruise in cruises.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              <span>{{ cruise.name }}</span>{{ cruise.river }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_cruise' country.id cruise.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{country.name}} Already Has All Cruises Available</h5>
+    {% endif %}
+  </div>
 </div>
 <script>
     let visitedEl = document.getElementById('id_visited')

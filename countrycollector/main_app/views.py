@@ -16,10 +16,12 @@ def countries_index(request):
 
 def countries_detail(request, country_id):
     country = Country.objects.get(id = country_id)
+    cruises_country_doesnt_have = RiverCruise.objects.exclude(id__in = country.cruises.all().values_list('id'))
     city_form = CityForm()
     return render(request, 'countries/detail.html', { 
         'country': country,
-        'city_form': city_form
+        'city_form': city_form,
+        'cruises': cruises_country_doesnt_have
         })
 
 def add_city(request, country_id):
@@ -28,6 +30,10 @@ def add_city(request, country_id):
         new_city = form.save(commit=False)
         new_city.country_id = country_id
         new_city.save()
+    return redirect('detail', country_id=country_id)
+
+def assoc_cruise(request, country_id, cruise_id):
+    Country.objects.get(id=country_id).cruises.add(cruise_id)
     return redirect('detail', country_id=country_id)
 
 
