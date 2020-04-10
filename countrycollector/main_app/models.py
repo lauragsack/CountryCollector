@@ -6,6 +6,7 @@ RIVERS = (
     ('E', 'Elbe'),  
     ('R', 'Rhone')
     )
+
 # Create your models here.
 class RiverCruise(models.Model):
     name = models.CharField(max_length=100)
