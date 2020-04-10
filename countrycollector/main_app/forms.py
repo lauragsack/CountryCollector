@@ -1,5 +1,10 @@
 from django import forms
-from .models import City
+from .models import Country, City
+
+class CountryForm(forms.ModelForm):
+    class Meta:
+        model = Country
+        fields = ['name', 'visited', 'language', 'continent']
 
 class CityForm(forms.ModelForm):
 

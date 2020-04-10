@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from .models import Country, City, RiverCruise
-from .forms import CityForm
+from .forms import CountryForm, CityForm
 # Create your views here.
 def home(request):
   return render (request, 'home.html')
@@ -35,6 +35,37 @@ def add_city(request, country_id):
 def assoc_cruise(request, country_id, cruise_id):
     Country.objects.get(id=country_id).cruises.add(cruise_id)
     return redirect('detail', country_id=country_id)
+
+def new_country(request):
+  if request.method == 'POST':
+    form = CountryForm(request.POST)
+    if form.is_valid():
+      country = form.save()
+      return redirect('detail', country.id)
+  else:
+    form = CountryForm()
+    context = { 'form': form }
+  return render(request, 'countries/country_form.html', context)
+
+def countries_update(request, country_id):
+  # Select the cat that we're updating from the DB
+  country = Country.objects.get(id=country_id)
+
+  # If the request is a POST
+  if request.method == "POST":
+    form = CountryForm(request.POST, instance=country)
+    if form.is_valid():
+      country = form.save()
+      return redirect('detail', country.id)
+  # If not a POST, create the form
+  else: 
+    form = CountryForm(instance=country)
+  # Render the form by sending the context to our existing template
+  return render(request, 'countries/country_form.html', { 'form': form })
+
+def countries_delete(request, country_id):
+  Country.objects.get(id=country_id).delete()
+  return redirect('index')
 
 
 

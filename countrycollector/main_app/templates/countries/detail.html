@@ -16,6 +16,10 @@
           <p>Visited: Not yet!</p>
         {% endif %}
       </div>
+
+      <div class="card-action">
+        <a href="{% url 'countries_update' country.id %}">EDIT</a>
+        <a href="{% url 'countries_delete' country.id %}">DELETE</a>
     </div>
   </div>
   <div class="col s6">
