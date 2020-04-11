@@ -81,7 +81,7 @@ class CruiseCreate(CreateView):
 
 class CruiseUpdate(UpdateView):
     model = RiverCruise
-    fiels = ['name', 'type']
+    fields = ['name', 'type']
 
 class CruiseDelete(DeleteView):
     model = RiverCruise
